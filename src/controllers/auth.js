@@ -16,23 +16,20 @@ function __usernameAndPasswordMatch(username, password, user) {
   return user.username === username && user.password === password;
 }
 
-function __prepareResponse(validUser) {
-  if (validUser.length) {
-    return validUser;
-  }
-  return false;
+function __createResponse(username, password, users) {
+  return users.find(user => {
+    return __usernameAndPasswordMatch(username, password, user)
+  });
 }
 
 function validateUser(body) {
   const { username, password } = body;
-  const validUser = users.reduce((acc, user) => {
-    if (__usernameAndPasswordMatch(username, password, user)) {
-      acc.push(user);
-    }
-    return acc;
-  }, []);
-  return __prepareResponse(validUser);
-};
+
+  if (!username) {
+    return false;
+  }
+  return __createResponse(username, password, users);
+}
 
 module.exports = {
   validateUser,
