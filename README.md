@@ -43,7 +43,3 @@ The GET /show route serves up the current orders (in the orders.json file) in th
 - POST /upload
 - POST /search
 
-## .gitignore
-
-I've ignored all the pertinent .json files (orders, customers, users etc) as they contained sensitive information that I did not want to commit to source control. 
-
